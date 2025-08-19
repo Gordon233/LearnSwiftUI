@@ -14,8 +14,12 @@ struct CounterView: View {
 
     var body: some View {
         VStack {
+            
             Text("计数: \(count)")
                 .font(.largeTitle)
+
+            Text(count > 10 ? "大于10" : "小于等于10")
+                .font(.title)
 
             Button("点击 +1") {
                 count += 1
