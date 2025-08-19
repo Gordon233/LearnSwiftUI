@@ -9,21 +9,26 @@ struct LearnSwiftUIApp: App {
     }
 }
 
+struct CountDisplay: View {
+    let count: Int  // 像React的props
+    
+    var body: some View {
+        Text("计数: \(count)")
+            .font(.largeTitle)
+    }
+}
+
 struct CounterView: View {
     @State private var count = 0
 
     var body: some View {
         VStack {
-            Text("计数: \(count)")
-                .font(.largeTitle)
+            CountDisplay(count: count)
 
             if count >= 10 {
                 Text("🎉 恭喜达到10！")
                     .font(.largeTitle)
                     .foregroundColor(.green)
-            } else {
-                Text("计数: \(count)")
-                    .font(.largeTitle)
             }
             
             Button("点击 +1") {
