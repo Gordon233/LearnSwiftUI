@@ -1,32 +1,27 @@
-//
-//  LearnSwiftUIApp.swift
-//  LearnSwiftUI
-//
-//  Created by Gordon on 8/19/25.
-//
-
 import SwiftUI
-import SwiftData
 
 @main
 struct LearnSwiftUIApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Item.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
-
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            CounterView()
         }
-        .modelContainer(sharedModelContainer)
+    }
+}
+
+struct CounterView: View {
+    @State private var count = 0
+
+    var body: some View {
+        VStack {
+            Text("计数: \(count)")
+                .font(.largeTitle)
+
+            Button("点击 +1") {
+                count += 1
+            }
+            .buttonStyle(.borderedProminent)
+        }
+        .padding()
     }
 }
