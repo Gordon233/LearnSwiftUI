@@ -15,6 +15,9 @@ struct CountDisplay: View {
     var body: some View {
         Text("计数: \(count)")
             .font(.largeTitle)
+            .foregroundColor(.green)
+            .scaleEffect(count >= 10 ? 1.5 : 1)
+            .animation(.easeIn, value: count)
     }
 }
 
