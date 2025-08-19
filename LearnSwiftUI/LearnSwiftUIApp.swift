@@ -11,11 +11,12 @@ struct LearnSwiftUIApp: App {
 
 struct CountDisplay: View {
     let count: Int  // 像React的props
+    @Binding var selectedColor: Color
     
     var body: some View {
         Text("计数: \(count)")
             .font(.largeTitle)
-            .foregroundColor(.green)
+            .foregroundColor(selectedColor)
             .scaleEffect(count >= 10 ? 1.5 : 1)
             .animation(.easeIn, value: count)
     }
@@ -40,12 +41,12 @@ struct ColorfulCounterView: View {
 
     var body: some View {
         VStack {
-            CountDisplay(count: count)
+            CountDisplay(count: count, selectedColor: $selectedColor)
 
             if count >= 10 {
                 Text("🎉 恭喜达到10！")
                     .font(.largeTitle)
-                    .foregroundColor(.green)
+                    .foregroundColor(selectedColor)
             }
             CountButton(count: $count)
             
