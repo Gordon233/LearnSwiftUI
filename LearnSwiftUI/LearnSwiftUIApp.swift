@@ -11,7 +11,7 @@ struct LearnSwiftUIApp: App {
 
 struct CountDisplay: View {
     let count: Int  // 像React的props
-    @Binding var selectedColor: Color
+    let selectedColor: Color
     
     var body: some View {
         Text("计数: \(count)")
@@ -41,7 +41,7 @@ struct ColorfulCounterView: View {
 
     var body: some View {
         VStack {
-            CountDisplay(count: count, selectedColor: $selectedColor)
+            CountDisplay(count: count, selectedColor: selectedColor)
 
             if count >= 10 {
                 Text("🎉 恭喜达到10！")
