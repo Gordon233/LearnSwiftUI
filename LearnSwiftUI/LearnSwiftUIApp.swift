@@ -4,7 +4,7 @@ import SwiftUI
 struct LearnSwiftUIApp: App {
     var body: some Scene {
         WindowGroup {
-            CounterView()
+            ColorfulCounterView()
         }
     }
 }
@@ -32,8 +32,11 @@ struct CountButton: View {
     }
 }
 
-struct CounterView: View {
+struct ColorfulCounterView: View {
     @State private var count = 0
+    @State private var selectedColor: Color = .blue
+    
+    let colors: [Color] = [.red, .green, .blue, .yellow, .orange]
 
     var body: some View {
         VStack {
@@ -45,6 +48,32 @@ struct CounterView: View {
                     .foregroundColor(.green)
             }
             CountButton(count: $count)
+            
+            // 分隔线
+           Divider()
+               .padding(.vertical)
+            
+            Text("选择颜色")
+            .font(.headline)
+            
+            HStack(spacing: 15) {
+                ForEach(colors, id: \.self) { color in
+                    Circle()
+                        .fill(color)
+                        .frame(width: 30, height: 30)
+                        .overlay(
+                            Circle()
+                                .stroke(Color.white, lineWidth: selectedColor == color ? 3 : 0)
+
+                        )
+                        .scaleEffect(selectedColor == color ? 1.2 : 1)
+                        .onTapGesture {
+                            withAnimation(.spring()) {
+                                selectedColor = color
+                            }
+                        }
+                }
+            }
             
 
         }
