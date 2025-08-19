@@ -18,6 +18,17 @@ struct CountDisplay: View {
     }
 }
 
+struct CountButton: View {
+    @Binding var count: Int  // 注意是 @Binding 不是 let
+    
+    var body: some View {
+        Button("点击 +1") {
+            count += 1
+        }
+        .buttonStyle(.borderedProminent)
+    }
+}
+
 struct CounterView: View {
     @State private var count = 0
 
@@ -30,11 +41,9 @@ struct CounterView: View {
                     .font(.largeTitle)
                     .foregroundColor(.green)
             }
+            CountButton(count: $count)
             
-            Button("点击 +1") {
-                count += 1
-            }
-            .buttonStyle(.borderedProminent)
+
         }
         .padding()
     }
