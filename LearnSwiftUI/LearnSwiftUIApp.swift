@@ -59,7 +59,11 @@ struct TodoListView: View {
 							Image(systemName: "trash")
 						}
 						Button(action: {
-							editingId = todos[index].id
+							if editingId == todos[index].id {
+								editingId = nil
+							} else {
+								editingId = todos[index].id
+							}
 						}) {
 							Image(systemName: "pencil")
 						}
