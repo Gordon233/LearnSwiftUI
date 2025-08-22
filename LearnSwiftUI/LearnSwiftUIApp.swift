@@ -18,6 +18,7 @@ struct TodoItem: Identifiable {
 struct TodoListView: View {
 	@State private var todos: [TodoItem] = []
 	@State private var newTodoText = ""
+	@State private var editingId: UUID? = nil
 	
 	var body: some View {
 		//input field: title
@@ -50,7 +51,7 @@ struct TodoListView: View {
 							Image(systemName: "trash")
 						}
 						Button(action: {
-							todos[index].title = "编辑任务"
+							editingId = todos[index].id
 						}) {
 							Image(systemName: "pencil")
 						}
