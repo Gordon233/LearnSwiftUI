@@ -34,8 +34,27 @@ struct TodoListView: View {
 			}
 			//todo list
 			List {
-				ForEach(todos) { todo in
-					Text(todo.title)
+				ForEach(todos.indices, id: \.self) { index in
+					HStack {
+                        Text(todos[index].title)
+							.strikethrough(todos[index].isCompleted)
+						Text(todos[index].isCompleted ? "已完成" : "未完成")
+						Button(action: {
+							todos[index].isCompleted.toggle()
+						}) {
+							Image(systemName: todos[index].isCompleted ? "checkmark.circle.fill" : "circle")
+						}
+						Button(action: {
+							todos.remove(at: index)
+						}) {
+							Image(systemName: "trash")
+						}
+						Button(action: {
+							todos[index].title = "编辑任务"
+						}) {
+							Image(systemName: "pencil")
+						}
+                    }
 				}
 			}
 		}
