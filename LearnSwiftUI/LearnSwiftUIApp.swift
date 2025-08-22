@@ -37,8 +37,15 @@ struct TodoListView: View {
 			List {
 				ForEach(todos.indices, id: \.self) { index in
 					HStack {
-                        Text(todos[index].title)
-							.strikethrough(todos[index].isCompleted)
+						if editingId == todos[index].id {
+							// 这里放什么？一个TextField让用户编辑
+							// 提示：TextField需要一个Binding，怎么得到todos[index].title的Binding？
+							TextField("编辑任务", text: $todos[index].title)
+								.textFieldStyle(.roundedBorder)
+						} else {
+							Text(todos[index].title)
+								.strikethrough(todos[index].isCompleted)
+						}
 						Text(todos[index].isCompleted ? "已完成" : "未完成")
 						Button(action: {
 							todos[index].isCompleted.toggle()
@@ -55,7 +62,7 @@ struct TodoListView: View {
 						}) {
 							Image(systemName: "pencil")
 						}
-                    }
+					}
 				}
 			}
 		}
