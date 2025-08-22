@@ -38,10 +38,11 @@ struct TodoListView: View {
 				ForEach(todos.indices, id: \.self) { index in
 					HStack {
 						if editingId == todos[index].id {
-							// 这里放什么？一个TextField让用户编辑
-							// 提示：TextField需要一个Binding，怎么得到todos[index].title的Binding？
 							TextField("编辑任务", text: $todos[index].title)
 								.textFieldStyle(.roundedBorder)
+								.onSubmit {
+									editingId = nil
+								}
 						} else {
 							Text(todos[index].title)
 								.strikethrough(todos[index].isCompleted)
